@@ -3,18 +3,7 @@ import { Avatar, Box, Typography } from "@mui/material";
 import React from "react";
 import { ThreadHeaderProps } from "../types";
 import { UserAvatar } from "../../UserAvatar";
-import moment from "moment";
-
-const formatDate = (date: Date) => {
-  const now = moment();
-  const messageDate = moment(date);
-  const diffDays = now.diff(messageDate, "days");
-
-  if (diffDays < 3) {
-    return messageDate.fromNow();
-  }
-  return messageDate.format("LLL");
-};
+import { formatDate } from "../../../utils/dateUtils";
 
 export const ThreadHeader: React.FC<ThreadHeaderProps> = ({
   author,
@@ -31,7 +20,7 @@ export const ThreadHeader: React.FC<ThreadHeaderProps> = ({
           height: 48,
         }}
       />
-      <Box flex={1} sx={{ ml: 2 }}>
+      <Box flex={1} ml={2}>
         <Box display="flex" alignItems="center" mb={0.5}>
           <Typography variant="subtitle1" fontWeight="bold" sx={{ mr: 1 }}>
             {author.name}

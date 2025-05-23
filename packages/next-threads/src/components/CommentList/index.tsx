@@ -13,7 +13,7 @@ import { CommentListProps } from "./types";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { ReplyForm } from "./components/ReplyForm";
 import { UserAvatar } from "../UserAvatar";
-import moment from "moment";
+import { formatDate } from "../../utils/dateUtils";
 
 export const CommentList: React.FC<CommentListProps> = ({
   comments,
@@ -94,7 +94,7 @@ export const CommentList: React.FC<CommentListProps> = ({
                     color="text.secondary"
                     sx={{ ml: 1 }}
                   >
-                    {moment(comment.createdAt).format("LLL")}
+                    {formatDate(comment.createdAt)}
                   </Typography>
                   {onRemoveComment &&
                     (isAdmin || comment.author.id === currentUser.id) && (

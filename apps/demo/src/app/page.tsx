@@ -26,7 +26,7 @@ const exampleThreads = [
     author: {
       id: "u1",
       name: "Jean Dupont",
-      avatar: "https://i.pravatar.cc/150?img=1",
+      avatar: <p>test</p>,
     },
     content: (
       <Box>
@@ -141,7 +141,7 @@ const commentsDatabase: Record<string, Comment[]> = {
       author: {
         id: "u1",
         name: "Sophie Martin",
-        avatar: "https://i.pravatar.cc/150?img=5",
+        avatar: <p>test</p>,
       },
       content: "Super projet ! J'ai hâte de voir le résultat final.",
       createdAt: new Date(2024, 1, 15, 14, 35),
