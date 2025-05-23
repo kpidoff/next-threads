@@ -29,10 +29,9 @@ export const ThreadHeader: React.FC<ThreadHeaderProps> = ({
         sx={{
           width: 48,
           height: 48,
-          mr: 3,
         }}
       />
-      <Box flex={1}>
+      <Box flex={1} sx={{ ml: 2 }}>
         <Box display="flex" alignItems="center" mb={0.5}>
           <Typography variant="subtitle1" fontWeight="bold" sx={{ mr: 1 }}>
             {author.name}
