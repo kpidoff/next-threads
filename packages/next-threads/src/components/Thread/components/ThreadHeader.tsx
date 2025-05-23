@@ -5,6 +5,17 @@ import { ThreadHeaderProps } from "../types";
 import { UserAvatar } from "../../UserAvatar";
 import moment from "moment";
 
+const formatDate = (date: Date) => {
+  const now = moment();
+  const messageDate = moment(date);
+  const diffDays = now.diff(messageDate, "days");
+
+  if (diffDays < 3) {
+    return messageDate.fromNow();
+  }
+  return messageDate.format("LLL");
+};
+
 export const ThreadHeader: React.FC<ThreadHeaderProps> = ({
   author,
   createdAt,
@@ -18,7 +29,7 @@ export const ThreadHeader: React.FC<ThreadHeaderProps> = ({
         sx={{
           width: 48,
           height: 48,
-          mr: 2,
+          mr: 3,
         }}
       />
       <Box flex={1}>
@@ -27,7 +38,7 @@ export const ThreadHeader: React.FC<ThreadHeaderProps> = ({
             {author.name}
           </Typography>
           <Typography variant="caption" color="text.secondary">
-            {moment(createdAt).format("LLL")}
+            {formatDate(createdAt)}
           </Typography>
         </Box>
         <Box
