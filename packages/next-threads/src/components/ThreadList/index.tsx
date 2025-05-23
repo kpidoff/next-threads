@@ -28,6 +28,7 @@ export const ThreadList: React.FC<ThreadListProps> = ({
       {sortedThreads.map((thread) => (
         <Thread
           key={thread.id}
+          hashtags={thread.hashtags}
           {...thread}
           {...(onThreadLike && { onLike: () => onThreadLike(thread.id) })}
           {...(onThreadComment && {

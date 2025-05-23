@@ -9,6 +9,11 @@ export interface Comment {
   likes?: number;
 }
 
+export interface Hashtag {
+  label: string;
+  color: string;
+}
+
 export interface ThreadProps {
   id: string;
   author: User;
@@ -25,12 +30,14 @@ export interface ThreadProps {
   onRemoveComment?: (commentId: string) => Promise<void>;
   isAdmin?: boolean;
   currentUser: User;
+  hashtags?: Hashtag[];
 }
 
 export interface ThreadHeaderProps {
   author: User;
   createdAt: Date;
   content: ReactNode;
+  hashtags?: Hashtag[];
 }
 
 export interface ThreadActionsProps {

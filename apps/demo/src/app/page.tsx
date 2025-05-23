@@ -10,7 +10,7 @@ interface Thread {
   author: {
     id: string;
     name: string;
-    avatar: string;
+    avatar: string | React.ReactElement;
   };
   content: React.ReactElement;
   createdAt: Date;
@@ -18,6 +18,10 @@ interface Thread {
   comments: number;
   shares: number;
   commentList: Comment[];
+  hashtags?: Array<{
+    label: string;
+    color: string;
+  }>;
 }
 
 const exampleThreads = [
@@ -26,18 +30,13 @@ const exampleThreads = [
     author: {
       id: "u1",
       name: "Jean Dupont",
-      avatar: <p>test</p>,
+      avatar: "https://i.pravatar.cc/150?img=15",
     },
     content: (
       <Box>
         <Typography variant="body1" gutterBottom>
           Juste partagé un nouveau projet sur lequel je travaille ! 🚀
         </Typography>
-        <Box display="flex" gap={1} flexWrap="wrap" mt={1}>
-          <Chip label="#coding" size="small" />
-          <Chip label="#nextjs" size="small" />
-          <Chip label="#typescript" size="small" />
-        </Box>
         <Box mt={2} p={2} bgcolor="grey.100" borderRadius={1}>
           <Typography variant="subtitle2" gutterBottom>
             Liens utiles :
@@ -53,6 +52,11 @@ const exampleThreads = [
         </Box>
       </Box>
     ),
+    hashtags: [
+      { label: "coding", color: "#2196F3" },
+      { label: "nextjs", color: "#4CAF50" },
+      { label: "typescript", color: "#9C27B0" },
+    ],
     createdAt: new Date(2024, 1, 15, 14, 30),
     likes: 42,
     comments: 12,
@@ -87,6 +91,11 @@ const exampleThreads = [
         </Box>
       </Box>
     ),
+    hashtags: [
+      { label: "typescript", color: "#9C27B0" },
+      { label: "nextjs", color: "#4CAF50" },
+      { label: "help", color: "#FF9800" },
+    ],
     createdAt: new Date(2024, 1, 15, 12, 15),
     likes: 28,
     comments: 15,
@@ -125,6 +134,11 @@ const exampleThreads = [
         </Box>
       </Box>
     ),
+    hashtags: [
+      { label: "success", color: "#4CAF50" },
+      { label: "team", color: "#E91E63" },
+      { label: "milestone", color: "#FFC107" },
+    ],
     createdAt: new Date(2024, 1, 14, 18, 45),
     likes: 156,
     comments: 23,
@@ -141,7 +155,7 @@ const commentsDatabase: Record<string, Comment[]> = {
       author: {
         id: "u1",
         name: "Sophie Martin",
-        avatar: <p>test</p>,
+        avatar: "https://i.pravatar.cc/150?img=1",
       },
       content: "Super projet ! J'ai hâte de voir le résultat final.",
       createdAt: new Date(2024, 1, 15, 14, 35),

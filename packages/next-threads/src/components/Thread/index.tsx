@@ -24,6 +24,7 @@ export const Thread: React.FC<ThreadProps> = ({
   onRemoveComment,
   currentUser,
   isAdmin = false,
+  hashtags = [],
 }) => {
   const [showComments, setShowComments] = useState(false);
   const [isLoadingComments, setIsLoadingComments] = useState(false);
@@ -89,7 +90,12 @@ export const Thread: React.FC<ThreadProps> = ({
         },
       }}
     >
-      <ThreadHeader author={author} createdAt={createdAt} content={content} />
+      <ThreadHeader
+        author={author}
+        createdAt={createdAt}
+        content={content}
+        hashtags={hashtags}
+      />
 
       <Divider sx={{ my: 2 }} />
 

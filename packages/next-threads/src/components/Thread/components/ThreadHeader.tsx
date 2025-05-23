@@ -1,14 +1,19 @@
-import { Avatar, Box, Typography } from "@mui/material";
+import { Avatar, Box, Chip, Typography } from "@mui/material";
+import { Hashtag, ThreadHeaderProps } from "../types";
 
 import React from "react";
-import { ThreadHeaderProps } from "../types";
 import { UserAvatar } from "../../UserAvatar";
 import { formatDate } from "../../../utils/dateUtils";
 
-export const ThreadHeader: React.FC<ThreadHeaderProps> = ({
+interface ExtendedThreadHeaderProps extends ThreadHeaderProps {
+  hashtags?: Hashtag[];
+}
+
+export const ThreadHeader: React.FC<ExtendedThreadHeaderProps> = ({
   author,
   createdAt,
   content,
+  hashtags = [],
 }) => {
   return (
     <Box display="flex" alignItems="flex-start" mb={2}>
@@ -21,13 +26,39 @@ export const ThreadHeader: React.FC<ThreadHeaderProps> = ({
         }}
       />
       <Box flex={1} ml={2}>
-        <Box display="flex" alignItems="center" mb={0.5}>
-          <Typography variant="subtitle1" fontWeight="bold" sx={{ mr: 1 }}>
-            {author.name}
-          </Typography>
-          <Typography variant="caption" color="text.secondary">
-            {formatDate(createdAt)}
-          </Typography>
+        <Box
+          display="flex"
+          alignItems="center"
+          justifyContent="space-between"
+          mb={0.5}
+        >
+          <Box display="flex" alignItems="center">
+            <Typography variant="subtitle1" fontWeight="bold" sx={{ mr: 1 }}>
+              {author.name}
+            </Typography>
+            <Typography variant="caption" color="text.secondary">
+              {formatDate(createdAt)}
+            </Typography>
+          </Box>
+          {hashtags.length > 0 && (
+            <Box display="flex" gap={1} flexWrap="wrap">
+              {hashtags.map((hashtag: Hashtag, index: number) => (
+                <Chip
+                  key={index}
+                  label={`#${hashtag.label}`}
+                  size="small"
+                  sx={{
+                    backgroundColor: hashtag.color,
+                    color: "white",
+                    "&:hover": {
+                      backgroundColor: hashtag.color,
+                      opacity: 0.8,
+                    },
+                  }}
+                />
+              ))}
+            </Box>
+          )}
         </Box>
         <Box
           sx={{
