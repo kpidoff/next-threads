@@ -1,0 +1,33 @@
+{
+  "name": "next-threads",
+  "version": "0.1.0",
+  "description": "Une bibliothèque React moderne construite avec Next.js 14 et Material-UI",
+  "private": false,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/VOTRE-USERNAME/next-threads.git"
+  },
+  "keywords": [
+    "react",
+    "next.js",
+    "material-ui",
+    "typescript"
+  ],
+  "author": "VOTRE-NOM",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/VOTRE-USERNAME/next-threads/issues"
+  },
+  "homepage": "https://github.com/VOTRE-USERNAME/next-threads#readme",
+  "scripts": {
+    "dev": "pnpm -r dev",
+    "build": "pnpm -r build",
+    "lint": "pnpm -r lint"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@types/react": "^18.2.0",
+    "@types/react-dom": "^18.2.0",
+    "typescript": "^5.0.0"
+  }
+} 

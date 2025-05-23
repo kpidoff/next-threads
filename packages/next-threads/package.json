@@ -1,0 +1,38 @@
+{
+  "name": "@next-threads/core",
+  "version": "0.1.14",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "dev": "nodemon --watch src --ext ts,tsx --exec \"tsup\"",
+    "build": "tsup src/index.ts --format cjs,esm --dts --external react --sourcemap",
+    "lint": "eslint src --ext .ts,.tsx"
+  },
+  "dependencies": {
+    "@emotion/react": "^11.11.0",
+    "@emotion/styled": "^11.11.0",
+    "@mui/icons-material": "^7.1.0",
+    "@mui/material": "^5.15.0",
+    "@mui/system": "^5.15.0",
+    "@types/react-transition-group": "^4.4.12",
+    "moment": "^2.30.1",
+    "nodemon": "^3.1.10",
+    "react-transition-group": "^4.4.5"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.0",
+    "@types/react-dom": "^18.2.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "tsup": "^8.0.0",
+    "typescript": "^5.0.0"
+  },
+  "peerDependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  }
+}
