@@ -41,16 +41,39 @@ export const CommentList: React.FC<CommentListProps> = ({
 
   return (
     <Box mt={2} pl={4}>
-      {comments.length === 0 ? (
+      <CSSTransition
+        in={comments.length === 0}
+        timeout={300}
+        classNames="no-comments"
+        unmountOnExit
+      >
         <Typography
           variant="body2"
           color="text.secondary"
           align="center"
           py={2}
+          sx={{
+            "&.no-comments-enter": {
+              opacity: 0,
+            },
+            "&.no-comments-enter-active": {
+              opacity: 1,
+              transition: "opacity 300ms ease-in",
+            },
+            "&.no-comments-exit": {
+              opacity: 1,
+            },
+            "&.no-comments-exit-active": {
+              opacity: 0,
+              transition: "opacity 300ms ease-out",
+            },
+          }}
         >
           Aucun commentaire pour le moment
         </Typography>
-      ) : (
+      </CSSTransition>
+
+      {comments.length > 0 && (
         <TransitionGroup>
           {comments.map((comment) => (
             <CSSTransition key={comment.id} timeout={300} classNames="comment">
