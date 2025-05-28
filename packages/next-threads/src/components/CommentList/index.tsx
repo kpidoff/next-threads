@@ -14,6 +14,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import { ReplyForm } from "./components/ReplyForm";
 import { UserAvatar } from "../UserAvatar";
 import { formatDate } from "../../utils/dateUtils";
+import { useDeviceType } from "../../hooks/useDeviceType";
 
 export const CommentList: React.FC<CommentListProps> = ({
   comments,
@@ -24,6 +25,7 @@ export const CommentList: React.FC<CommentListProps> = ({
   isAdmin = false,
 }) => {
   const theme = useTheme();
+  const { isMobile } = useDeviceType();
   const [deletingCommentId, setDeletingCommentId] = useState<string | null>(
     null
   );
@@ -40,7 +42,13 @@ export const CommentList: React.FC<CommentListProps> = ({
   };
 
   return (
-    <Box mt={2} pl={4}>
+    <Box
+      mt={2}
+      pl={{
+        xs: 1,
+        sm: 4,
+      }}
+    >
       <CSSTransition
         in={comments.length === 0}
         timeout={300}
@@ -80,9 +88,14 @@ export const CommentList: React.FC<CommentListProps> = ({
               <Box
                 mb={2}
                 sx={{
-                  p: 2,
+                  p: { xs: 0, sm: 2 },
                   borderRadius: 1,
-                  bgcolor: theme.palette.grey[50],
+                  borderBottom: {
+                    xs: `1px solid ${theme.palette.divider}`,
+                    sm: "none",
+                  },
+                  pb: { xs: 2, sm: 3 },
+                  bgcolor: { xs: "transparent", sm: theme.palette.grey[50] },
                   "&.comment-enter": {
                     opacity: 0,
                     transform: "translateY(-20px)",
@@ -103,22 +116,29 @@ export const CommentList: React.FC<CommentListProps> = ({
                   },
                 }}
               >
-                <Box display="flex" alignItems="center" mb={1}>
-                  <UserAvatar
-                    avatar={comment.author.avatar}
-                    name={comment.author.name}
-                    sx={{ width: 24, height: 24, mr: 1 }}
-                  />
-                  <Typography variant="subtitle2" fontWeight="bold">
-                    {comment.author.name}
-                  </Typography>
-                  <Typography
-                    variant="caption"
-                    color="text.secondary"
-                    sx={{ ml: 1 }}
-                  >
-                    {formatDate(comment.createdAt)}
-                  </Typography>
+                <Box
+                  display="flex"
+                  alignItems="flex-start"
+                  mb={1}
+                  px={{ xs: 1, sm: 0 }}
+                >
+                  <Box display="flex" flexDirection="column">
+                    <Box display="flex" alignItems="center">
+                      <UserAvatar
+                        avatar={comment.author.avatar}
+                        name={comment.author.name}
+                        sx={{ width: 32, height: 32, mr: 1 }}
+                      />
+                      <Box>
+                        <Typography variant="subtitle2" fontWeight="bold">
+                          {comment.author.name}
+                        </Typography>
+                        <Typography variant="caption" color="text.secondary">
+                          {formatDate(comment.createdAt)}
+                        </Typography>
+                      </Box>
+                    </Box>
+                  </Box>
                   {onRemoveComment &&
                     (isAdmin || comment.author.id === currentUser.id) && (
                       <IconButton
@@ -136,7 +156,9 @@ export const CommentList: React.FC<CommentListProps> = ({
                       </IconButton>
                     )}
                 </Box>
-                <Typography variant="body2">{comment.content}</Typography>
+                <Typography variant="body2" px={{ xs: 1, sm: 0 }}>
+                  {comment.content}
+                </Typography>
               </Box>
             </CSSTransition>
           ))}

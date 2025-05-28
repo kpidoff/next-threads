@@ -82,7 +82,18 @@ export const Thread: React.FC<ThreadProps> = ({
     <Card
       elevation={1}
       sx={{
-        p: 3,
+        p: {
+          xs: 2,
+          sm: 3,
+        },
+        pl: {
+          xs: 2,
+          sm: 3,
+        },
+        pr: {
+          xs: 2,
+          sm: 3,
+        },
         borderRadius: 2,
         transition: "all 0.2s ease-in-out",
         "&:hover": {

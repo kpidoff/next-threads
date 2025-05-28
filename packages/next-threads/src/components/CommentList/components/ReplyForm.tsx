@@ -1,8 +1,16 @@
-import { Box, Button, CircularProgress, TextField } from "@mui/material";
+import {
+  Box,
+  Button,
+  CircularProgress,
+  IconButton,
+  TextField,
+} from "@mui/material";
 import React, { useState } from "react";
 
 import { ReplyFormProps } from "../../Thread/types";
+import SendIcon from "@mui/icons-material/Send";
 import { UserAvatar } from "../../UserAvatar";
+import { useDeviceType } from "../../../hooks/useDeviceType";
 
 export const ReplyForm: React.FC<ReplyFormProps> = ({
   currentUser,
@@ -11,6 +19,7 @@ export const ReplyForm: React.FC<ReplyFormProps> = ({
 }) => {
   const [reply, setReply] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const { isMobile } = useDeviceType();
 
   const handleSubmit = async () => {
     if (reply.trim()) {
@@ -37,7 +46,11 @@ export const ReplyForm: React.FC<ReplyFormProps> = ({
       <UserAvatar
         avatar={currentUser.avatar}
         name={currentUser.name}
-        sx={{ width: 32, height: 32 }}
+        sx={{
+          width: { xs: 28, sm: 32 },
+          height: { xs: 28, sm: 32 },
+          mt: { xs: 0.5, sm: 0 },
+        }}
       />
       <TextField
         fullWidth
@@ -66,19 +79,46 @@ export const ReplyForm: React.FC<ReplyFormProps> = ({
           },
         }}
       />
-      <Button
-        type="button"
-        variant="contained"
-        disabled={!reply.trim() || disabled || isLoading}
-        onClick={handleSubmit}
-        sx={{ borderRadius: 2, minWidth: 100 }}
-      >
-        {isLoading ? (
-          <CircularProgress size={20} color="inherit" />
-        ) : (
-          "Répondre"
-        )}
-      </Button>
+      {isMobile ? (
+        <IconButton
+          type="button"
+          color="primary"
+          disabled={!reply.trim() || disabled || isLoading}
+          onClick={handleSubmit}
+          sx={{
+            borderRadius: 2,
+            bgcolor: "primary.main",
+            color: "white",
+            "&:hover": {
+              bgcolor: "primary.dark",
+            },
+            "&.Mui-disabled": {
+              bgcolor: "action.disabledBackground",
+              color: "action.disabled",
+            },
+          }}
+        >
+          {isLoading ? (
+            <CircularProgress size={20} color="inherit" />
+          ) : (
+            <SendIcon />
+          )}
+        </IconButton>
+      ) : (
+        <Button
+          type="button"
+          variant="contained"
+          disabled={!reply.trim() || disabled || isLoading}
+          onClick={handleSubmit}
+          sx={{ borderRadius: 2, minWidth: 100 }}
+        >
+          {isLoading ? (
+            <CircularProgress size={20} color="inherit" />
+          ) : (
+            "Répondre"
+          )}
+        </Button>
+      )}
     </Box>
   );
 };

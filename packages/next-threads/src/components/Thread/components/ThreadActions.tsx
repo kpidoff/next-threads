@@ -24,7 +24,15 @@ export const ThreadActions: React.FC<ThreadActionsProps> = ({
   const theme = useTheme();
 
   return (
-    <Box display="flex" alignItems="center" gap={1}>
+    <Box
+      display="flex"
+      alignItems="center"
+      gap={1}
+      pl={{
+        xs: 2,
+        sm: 0,
+      }}
+    >
       {onLike && (
         <IconButton
           onClick={onLike}

@@ -1,6 +1,6 @@
 {
   "name": "next-threads",
-  "version": "0.1.0",
+  "version": "1.0.1",
   "description": "Une bibliothèque React moderne construite avec Next.js 14 et Material-UI",
   "private": false,
   "repository": {
